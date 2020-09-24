@@ -60,14 +60,47 @@ public class Primes {
      * 判断数字X能不能被大于等于k小于X的数字整除
      */
     private static boolean isDivisible(int x, int k) {
-        /* 根据范围排除,守卫   **/
-        if (k >= x) {
-            return false;
-        } else if (x % k == 0) {
-            return true;
-        } else {
-            return isDivisible(x, k + 1);
+        /*
+         * 版本1
+         * 采用递归思想，从2开始除，符合条件就返回，否则就一步一步递归下去，直到除到k=x 或者 被k整除
+         */
+//        if (k >= x) {
+//            return false;
+//        } else if (x % k == 0) {
+//            return true;
+//        } else {
+//            return isDivisible(x, k + 1);
+//        }
+        /* 版本2 和上面的代码效果相同
+         * 采用while循环从2开始到 k=x结束，中途如果符合x整除k就返回
+         */
+//        while (k < x) {
+//            if (x % k == 0) {
+//                return true;
+//            }
+//            k = k + 1;
+//        }
+//        return false;
+        /* 版本3
+         * 主要思想 while循环 ，不过采用了一个临时变量作为循环变量
+         * */
+//        int k1 = k;
+//        while (k1 < x) {
+//            if (x % k1 == 0) {
+//                return true;
+//            }
+//            k1++;
+//        }
+//        return false;
+        /* 版本4
+         *  主要思想是for循环，使用for循环便利从 k到x之间的数如果又符合整除条件的数就会放回true
+         */
+        for (int k1 = k; k1 < x; k1++) {
+            if (x % k1 == 0) {
+                return true;
+            }
         }
+        return false;
     }
 
 }
