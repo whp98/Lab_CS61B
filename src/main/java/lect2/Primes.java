@@ -95,7 +95,20 @@ public class Primes {
         /* 版本4
          *  主要思想是for循环，使用for循环便利从 k到x之间的数如果又符合整除条件的数就会放回true
          */
-        for (int k1 = k; k1 < x; k1++) {
+//        for (int k1 = k; k1 < x; k1++) {
+//            if (x % k1 == 0) {
+//                return true;
+//            }
+//        }
+//        return false;
+        /* 版本5
+         * 根据定理对版本四做优化 a整除b 则b/a 能整除b
+         * 当且仅当  N/k>根号N   k<=根号N成立
+         * 根据上面的定理推出满足条件的结果必定在
+         *  [2,根号N] 中间产生
+         * **/
+        int limit = (int) Math.round(Math.sqrt(x));
+        for (int k1 = k; k1 < limit; k1++) {
             if (x % k1 == 0) {
                 return true;
             }
